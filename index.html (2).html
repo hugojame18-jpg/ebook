@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>The Trader's Manual</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #030303;
+    background-image: radial-gradient(circle at 50% 0%, #111111 0%, #030303 70%);
+    font-family: 'Inter', sans-serif;
+    color: white;
+    padding: 50px 15px;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 850px;
+    margin: auto;
+}
+
+.card {
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(7, 7, 7, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 60px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+}
+
+.label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #9b8a6d;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 500;
+    line-height: 0.95;
+    margin-bottom: 25px;
+}
+
+.description {
+    font-size: 20px;
+    line-height: 1.7;
+    color: #a3a3a3;
+    max-width: 650px;
+    font-weight: 300;
+}
+
+.book {
+    margin: 80px auto;
+    border: 1px solid rgba(155, 138, 109, 0.2);
+    background: linear-gradient(145deg, #0a0a0a, #050505);
+    padding: 50px 40px;
+    max-width: 320px;
+    text-align: center;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    cursor: default;
+}
+
+.book:hover {
+    transform: translateY(-10px);
+    border-color: rgba(155, 138, 109, 0.5);
+    box-shadow: 0 20px 40px rgba(155, 138, 109, 0.08);
+}
+
+.book small {
+    color: #9b8a6d;
+    letter-spacing: 3px;
+}
+
+.book h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    margin-top: 20px;
+    font-style: italic;
+}
+
+.section-title {
+    margin-top: 80px;
+    margin-bottom: 40px;
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: #9b8a6d;
+}
+
+.toc li {
+    list-style: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-style: italic;
+    margin-bottom: 18px;
+    color: #cccccc;
+    transition: color 0.3s ease;
+}
+
+.toc li:hover {
+    color: #ffffff;
+}
+
+.form-box {
+    margin-top: 100px;
+    padding: 60px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: #080808;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.form-box h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 58px;
+    line-height: 1;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.form-box p {
+    color: #a3a3a3;
+    margin-bottom: 45px;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+input, select {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #2c2c2c;
+    padding: 18px 0;
+    margin-bottom: 35px;
+    color: white;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-bottom-color: #9b8a6d;
+    background: rgba(255, 255, 255, 0.02);
+    padding-left: 15px;
+}
+
+input::placeholder {
+    color: #555;
+}
+
+option {
+    color: black;
+}
+
+button {
+    width: 100%;
+    background: white;
+    color: black;
+    border: none;
+    padding: 20px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    margin-top: 10px;
+}
+
+button:hover:not(:disabled) {
+    background: #9b8a6d;
+    color: white;
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(155, 138, 109, 0.2);
+}
+
+button:disabled {
+    background: #222;
+    color: #555;
+    cursor: not-allowed;
+}
+
+.note {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #555;
+}
+
+.success {
+    display: none;
+    opacity: 0;
+    margin-top: 100px;
+    border: 1px solid rgba(155, 138, 109, 0.3);
+    background: #080808;
+    padding: 80px 40px;
+    text-align: center;
+    transition: opacity 0.8s ease;
+}
+
+.success h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    margin-bottom: 20px;
+    color: #9b8a6d;
+}
+
+.success p {
+    color: #a3a3a3;
+    margin-bottom: 40px;
+    font-size: 18px;
+}
+
+.download {
+    display: inline-block;
+    padding: 20px 40px;
+    background: white;
+    color: black;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 3px;
+    transition: all 0.4s ease;
+}
+
+.download:hover {
+    background: #9b8a6d;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(155, 138, 109, 0.2);
+}
+
+footer {
+    margin-top: 80px;
+    text-align: center;
+    color: #444;
+    font-size: 11px;
+    letter-spacing: 3px;
+}
+
+.animate-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media(max-width: 768px) {
+    .card { padding: 30px 20px; }
+    h1 { font-size: 46px; }
+    .description { font-size: 18px; }
+    .form-box { padding: 40px 20px; }
+    .form-box h3 { font-size: 42px; }
+    .toc li { font-size: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<div class="label animate-up">
+LUCAS — TRADING RESEARCH
+</div>
+
+<h1 class="animate-up delay-1">La science du marché.</h1>
+
+<p class="description animate-up delay-2">
+Un cadre complet pour comprendre les concepts ICT / SMC,
+la logique du marché, la gestion du risque et le comportement
+des institutions.
+</p>
+
+<div class="book animate-up delay-3">
+<small>VOLUME IV</small>
+<h2>The Trader's Manual</h2>
+</div>
+
+<div class="animate-up delay-3">
+    <div class="section-title">
+    SOMMAIRE — 14 CHAPITRES
+    </div>
+
+    <ul class="toc">
+    <li>01 — L'algorithme</li>
+    <li>02 — AMD</li>
+    <li>03 — Fair Value Gap</li>
+    <li>04 — Time / Temps</li>
+    <li>05 — 3 Bar Swing</li>
+    <li>06 — Institutional Sponsorship</li>
+    <li>07 — Power Of 3</li>
+    <li>08 — PD Arrays</li>
+    <li>09 — Order Block</li>
+    <li>10 — Breaker Block</li>
+    <li>11 — Mitigation Block</li>
+    <li>12 — Dealing Range</li>
+    <li>13 — Premium vs Discount</li>
+    <li>14 — Conclusion</li>
+    </ul>
+</div>
+
+<form id="leadForm" action="https://script.google.com/macros/s/AKfycbymgP0cWar_1NyQp8h_eQDuzvQNQp-SeQ1HGRsK_mqPIQi0joaZ4KBf7Q_gym32LHI/exec" method="POST" target="hidden_iframe" class="form-box animate-up delay-3">
+
+<div class="label">
+INVITATION D'ACCÈS
+</div>
+
+<h3>Recevez l'ebook gratuitement.</h3>
+
+<p>
+Répondez aux questions ci-dessous pour débloquer
+immédiatement le téléchargement.
+</p>
+
+<input type="text" id="prenom" name="prenom" placeholder="Prénom" required>
+<input type="text" id="instagram" name="instagram" placeholder="Instagram (@votrecompte)" required>
+
+<input type="tel" id="telephone" name="telephone" placeholder="Téléphone (ex: 0612345678)" required 
+       pattern="^(?:(?:\+|00)33|0)[1-9](?:[\s.-]*\d{2}){4}$" 
+       title="Veuillez entrer un numéro de téléphone valide (ex: 0612345678 ou +33 6 12 34 56 78)">
+
+<select id="niveau" name="niveau" required>
+<option value="" disabled selected hidden>Quel est ton niveau ?</option>
+<option>Débutant</option>
+<option>Intermédiaire</option>
+<option>Avancé</option>
+</select>
+
+<select id="objectif" name="objectif" required>
+<option value="" disabled selected hidden>Ton objectif principal ?</option>
+<option>Être rentable</option>
+<option>Comprendre ICT / SMC</option>
+<option>Réussir une Prop Firm</option>
+<option>Revenu complémentaire</option>
+<option>Vivre du trading</option>
+</select>
+
+<button type="submit" id="submitBtn">
+DÉBLOQUER MON EBOOK
+</button>
+
+<div class="note">
+AUCUN SPAM • DONNÉES CONFIDENTIELLES
+</div>
+
+</form>
+
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+<div id="success" class="success">
+
+<h2>Merci.</h2>
+
+<p>
+Votre exemplaire est prêt.
+Téléchargez-le ci-dessous.
+</p>
+
+<a class="download" href="Ebook-Trading-Lucas.pdf" download>
+TÉLÉCHARGER L'EBOOK
+</a>
+
+</div>
+
+<footer>
+© 2026 LUCAS — TOUS DROITS RÉSERVÉS
+</footer>
+
+</div>
+
+</div>
+
+<script>
+let submitted = false;
+
+document.getElementById('hidden_iframe').addEventListener('load', function() {
+    if (submitted) {
+        const form = document.getElementById("leadForm");
+        const successMsg = document.getElementById("success");
+        
+        form.style.opacity = "0";
+        form.style.transform = "translateY(-20px)";
+        
+        setTimeout(() => {
+            form.style.display = "none";
+            successMsg.style.display = "block";
+            setTimeout(() => {
+                successMsg.style.opacity = "1";
+            }, 50);
+        }, 600);
+    }
+});
+
+document.getElementById("leadForm").addEventListener("submit", function(e){
+    submitted = true;
+    const submitBtn = document.getElementById("submitBtn");
+    submitBtn.disabled = true;
+    submitBtn.innerText = "CONNEXION SÉCURISÉE...";
+});
+</script>
+
+</body>
+</html>
